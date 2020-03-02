@@ -11,7 +11,7 @@ async function getCategorias() {
         }else{
             var categoriaJSON = [];
             resp.forEach(function (cat, index, arr) {
-                usuarioJSON.push(
+                categoriaJSON.push(
                     {
                         Id: cat.id_categoria,
                         Nombre: cat.nombre
@@ -39,7 +39,7 @@ async function getCategoriaPorUsuario(Id) {
         }else{
             var categoriaJSON = [];
             resp.forEach(function (cat, index, arr) {
-                usuarioJSON.push(
+                categoriaJSON.push(
                     {
                         Id: cat.id_categoria,
                         Nombre: cat.nombre

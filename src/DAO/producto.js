@@ -74,9 +74,9 @@ async function agregarProducto(producto) {
         conn.release();
 
         if (resp.affectedRows > 0){
-            return "Se agrego correctamente";
+            return {estado:'correcto', mensaje: 'Se agrego correctamente'};
         }else {
-            return "No se agrego";
+            return {estado:'Fallo', mensaje: 'No se agrego'};
         }
 
     } catch (err) {
@@ -100,9 +100,9 @@ async function actualizarProducto(producto) {
         //     return "Error actualizando";
         // }else
         if (resp.affectedRows > 0){
-            return "Se actualizo correctamente";
+            return {estado:'correcto', mensaje: 'Se actualizo correctamente'};
         }else {
-            return "No se actualizo";
+            return {estado:'Fallo', mensaje: 'No se actualizo'};
         }
     } catch (err) {
         console.log(err);
@@ -124,9 +124,9 @@ async function eliminarProducto(Id) {
         //     return "Error actualizando";
         // }else
         if (resp.affectedRows > 0){
-            return "Se elimino correctamente";
+            return {estado:'correcto', mensaje: 'Se elimino correctamente'};
         }else {
-            return "No se elimino";
+            return {estado:'Fallo', mensaje: 'No se elimino'};
         }
     } catch (err) {
         console.log(err);

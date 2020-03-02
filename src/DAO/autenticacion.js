@@ -13,13 +13,20 @@ async function crearToken() {
 
 async function verificarToken(token) {
     if (token) {
+        var respuesta = {};
         jwt.verify(token, process.env.CLAVE, (err, decoded) => {
             if (err) {
-                return { mensaje: 'invalido' };
+                respuesta = { mensaje: 'invalido' };
+                return respuesta;
             } else {
-                return { mensaje: 'correcto'};
+                console.log('decode ' +decoded.check);
+                if(decoded.check === true){
+                    respuesta = { mensaje: 'correcto' };
+                    return respuesta;
+                }
             }
         });
+        return respuesta;
     } else {
         return { mensaje: 'no token' };
     }

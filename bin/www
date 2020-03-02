@@ -8,6 +8,10 @@ var app = require('../app');
 var debug = require('debug')('myapis:server');
 var http = require('http');
 var mariaDb = require('mariadb');
+var https =  require('https');
+var fs = require('fs');
+
+
 
 /**
  * Get port from environment and store in Express.
@@ -16,11 +20,19 @@ var mariaDb = require('mariadb');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+const hskey = fs.readFileSync('./certificados/key.pem', 'utf8');
+const hscert = fs.readFileSync('./certificados/server.crt', 'utf8');
+
+const serverOptions = {
+  key: hskey,
+  cert: hscert
+};
+
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(serverOptions, app);
 
 /**
  * Listen on provided port, on all network interfaces.

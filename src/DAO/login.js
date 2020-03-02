@@ -3,9 +3,10 @@ var mariaDb = require('../db/db');
 async function iniciarSesion(usuario) {
     try {
         let conn = await mariaDb.getConn();
-        const resp = await conn.query("select id_usuario from login where usuario = ?, contrasenia = ?;", [usuario.usuario, usuario.contrasenia]);
+        const resp = await conn.query("select id_usuario from login where usuario = ? and contrasenia = ?;", [usuario.usuario, usuario.contrasenia]);
         conn.release();
         // console.log(resp.length);
+        console.log(resp);
         if(resp.length === 0){
             return " ";
         }else{
@@ -21,6 +22,7 @@ async function iniciarSesion(usuario) {
                     };
 
             });
+
             actualizarEstado(usuarioJSON);
             return usuarioJSON;
         }
@@ -33,25 +35,30 @@ async function iniciarSesion(usuario) {
 
 async function cerrarSesion(usuario) {
     try {
-        let conn = await mariaDb.getConn();
-        const resp = await conn.query("select id_usuario from login where id_usuario = ?;", [usuario.id]);
-        conn.release();
-        // console.log(resp.length);
-        if(resp.length === 0){
-            return " ";
-        }else{
-            var usuarioJSON = {};
-            resp.forEach(function (us, index, arr) {
-                usuarioJSON=
-                    {
-                        id: us.id_usuario,
-                        estado: 'no'
-                    };
+        if (usuario.id !== undefined){
+            let conn = await mariaDb.getConn();
+            const resp = await conn.query("select id_usuario from login where id_usuario = ?;", [usuario.id]);
+            conn.release();
+            // console.log('resp ---- '+resp.length);
+            if(resp.length === 0){
+                return " ";
+            }else{
+                var usuarioJSON = {};
+                resp.forEach(function (us, index, arr) {
+                    usuarioJSON=
+                        {
+                            id: us.id_usuario,
+                            estado: 'no'
+                        };
 
-            });
-            actualizarEstado(usuarioJSON);
-            return usuarioJSON;
+                });
+                actualizarEstado(usuarioJSON);
+                return usuarioJSON;
+            }
+        }else {
+            return " ";
         }
+
 
     } catch (err) {
         console.log(err);
@@ -62,7 +69,7 @@ async function cerrarSesion(usuario) {
 async function actualizarEstado(usuario) {
     try {
         let conn = await mariaDb.getConn();
-        const resp = await conn.query("update usuario set es_activo = ? where id = ?;", [usuario.estado, Number(usuario.id)]);
+        const resp = await conn.query("update usuario set es_activo = ? where id_usuario = ?;", [usuario.estado, Number(usuario.id)]);
         conn.release();
 
         // if (resp === null){
