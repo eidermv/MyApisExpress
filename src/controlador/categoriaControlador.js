@@ -34,7 +34,7 @@ router.post('/categorias', async function(req, res, next) {
 });
 
 
-router.post('/categoriaUs', async function(req, res, next) {
+router.post('/porUs', async function(req, res, next) {
     var usuario = req.body;
     if (!usuario){
         return  res.status(500).send({estado: 'Fallo', mensaje:'Datos incorrectos'});
