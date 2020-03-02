@@ -3,7 +3,7 @@ var productoDAO = require('../DAO/producto');
 var autenticacion = require('../DAO/autenticacion');
 var router = express.Router();
 
-router.post('/producto/productos', async function(req, res, next) {
+router.post('/productos', async function(req, res, next) {
 
     const token = req.headers['access-token'];
     // console.log(token);
@@ -33,7 +33,7 @@ router.post('/producto/productos', async function(req, res, next) {
 });
 
 
-router.post('/producto/porId', async function(req, res, next) {
+router.post('/porId', async function(req, res, next) {
     var producto = req.body;
     if (!producto){
         return  res.status(500).send({estado: 'Fallo', mensaje:'Datos incorrectos'});
@@ -65,7 +65,7 @@ router.post('/producto/porId', async function(req, res, next) {
 
 });
 
-router.post('/producto/agregar', async function(req, res, next) {
+router.post('/agregar', async function(req, res, next) {
     var producto = req.body;
     if (!producto){
         return  res.status(500).send({estado: 'Fallo', mensaje:'Datos incorrectos'});
@@ -99,7 +99,7 @@ router.post('/producto/agregar', async function(req, res, next) {
 
 });
 
-router.post('/producto/actualizar', async function(req, res, next) {
+router.post('/actualizar', async function(req, res, next) {
     var producto = req.body;
     if (!producto){
         return  res.status(500).send({estado: 'Fallo', mensaje:'Datos incorrectos'});
@@ -133,7 +133,7 @@ router.post('/producto/actualizar', async function(req, res, next) {
 
 });
 
-router.post('/producto/eliminar', async function(req, res, next) {
+router.post('/eliminar', async function(req, res, next) {
     var producto = req.body;
     if (!producto){
         return  res.status(500).send({estado: 'Fallo', mensaje:'Datos incorrectos'});

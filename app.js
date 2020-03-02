@@ -13,6 +13,9 @@ dotenv.config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginC = require('./src/controlador/loginControlador');
+var usuarioC = require('./src/controlador/usuarioControlador');
+var categoriaC = require('./src/controlador/categoriaControlador');
+var productoC = require('./src/controlador/productoControlador');
 
 var app = express();
 
@@ -32,6 +35,9 @@ app.use(helmet());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginC);
+app.use('/usuario', usuarioC);
+app.use('/categoria', categoriaC);
+app.use('/producto', productoC);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

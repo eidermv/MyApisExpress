@@ -3,7 +3,7 @@ var usuarioDAO = require('../DAO/usuario');
 var autenticacion = require('../DAO/autenticacion');
 var router = express.Router();
 
-router.post('/usuario', async function(req, res, next) {
+router.post('/getUsuario', async function(req, res, next) {
     var usuario = req.body;
     if (!usuario){
         return  res.status(500).send({estado: 'Fallo', mensaje:'Datos incorrectos'});
