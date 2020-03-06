@@ -35,7 +35,7 @@ async function getProductos() {
 async function getProductoPorID(Id) {
     try {
         let conn = await mariaDb.getConn();
-        const resp = await conn.query("select id_producto, nombre, porcentaje_ganancia, precio, cantidad, id_categoria from producto where id = ?;", [Id]);
+        const resp = await conn.query("select id_producto, nombre, porcentaje_ganancia, precio, cantidad, id_categoria from producto where id_producto = ?;", [Id]);
         conn.release();
         // console.log(resp.length);
         if(resp.length === 0){

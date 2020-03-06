@@ -6,7 +6,7 @@ var router = express.Router();
 router.post('/porId', async function(req, res, next) {
     var usuario = req.body;
     if (!usuario){
-        return  res.status(500).send({estado: 'Fallo', mensaje:'Datos incorrectos'});
+        return  res.status(200).send({estado: 'Fallo', mensaje:'Datos incorrectos'});
     }
     const token = req.headers['access-token'];
     // console.log(token);
@@ -18,7 +18,7 @@ router.post('/porId', async function(req, res, next) {
 
             var uexiste = await usuarioDAO.getUsuario(usuario.id);
             if(uexiste === " " || uexiste === null){
-                return res.status(500).send({estado: 'Fallo', mensaje:'Usuario incorrecto'});
+                return res.status(200).send({estado: 'Fallo', mensaje:'Usuario incorrecto'});
             }
             //console.log(pexiste);
 
@@ -26,11 +26,11 @@ router.post('/porId', async function(req, res, next) {
             // res.status(200).send('Se agrego correctamente');
 
         }else {
-            return res.status(500).send({estado: 'Fallo', mensaje:'Token incorrecto'});
+            return res.status(200).send({estado: 'Fallo', mensaje:'Token incorrecto'});
         }
 
     }else{
-        return res.status(500).send({estado: 'Fallo', mensaje:'No se recibio el token'});
+        return res.status(200).send({estado: 'Fallo', mensaje:'No se recibio el token'});
     }
 
 });

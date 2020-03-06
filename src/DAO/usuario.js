@@ -5,7 +5,7 @@ async function getUsuario(Id) {
         let conn = await mariaDb.getConn();
         const resp = await conn.query("select nombre, apellido, id_usuario from usuario where id_usuario = ?;", [Id]);
         conn.release();
-        // console.log(resp.length);
+        console.log(resp.length);
         if(resp.length === 0){
             return " ";
         }else{
